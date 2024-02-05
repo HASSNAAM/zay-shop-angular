@@ -15,6 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CarticonComponent } from './carticon/carticon.component';
 import { CartService } from './cart.service';
+import { CartComponent } from './cart/cart.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,6 +27,7 @@ import { CartService } from './cart.service';
     FooterComponent,
     NavbarComponent,
     CarticonComponent,
+    CartComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,14 +1,16 @@
+// cart.component.ts
+
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { CartService } from '../cart.service';
+import { CartService } from '../cart.service'; // Adjust the path
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-carticon',
-  templateUrl: './carticon.component.html',
-  styleUrls: ['./carticon.component.css'],
+  selector: 'app-cart',
+  templateUrl: './cart.component.html',
+  styleUrls: ['./cart.component.css'],
 })
-export class CarticonComponent implements OnInit, OnDestroy {
-  cartItemCount: number = 0;
+export class CartComponent implements OnInit, OnDestroy {
+  cartItems: any[] = [];
   private cartItemsSubscription!: Subscription;
 
   constructor(private cartService: CartService) {}
@@ -17,7 +19,7 @@ export class CarticonComponent implements OnInit, OnDestroy {
     this.cartItemsSubscription = this.cartService
       .getCartItemsSubject()
       .subscribe((cartItems) => {
-        this.cartItemCount = cartItems.length;
+        this.cartItems = cartItems;
       });
   }
 

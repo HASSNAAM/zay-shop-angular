@@ -9,27 +9,20 @@ import { CartService } from '../cart.service';
   templateUrl: './shop.component.html',
   styleUrls: ['./shop.component.css'],
 })
-export class ShopComponent implements OnInit, OnDestroy {
+export class ShopComponent implements OnInit {
   products: any[] = [];
-  cartItems: any[] = [];
-
   private apiUrl = 'https://fakestoreapi.com/products';
   constructor(
     private shopService: ShopService,
     private router: Router,
     private http: HttpClient,
-    private cartService: CartService,
-    private cartItemsSubscription: Subscription
+    private cartService: CartService
   ) {}
+  cartItems: any[] = [];
   ngOnInit(): void {
     this.shopService.getProducts().subscribe((data) => {
       this.products = data;
     });
-    this.cartItemsSubscription = this.cartService
-      .getCartItemsSubject()
-      .subscribe((cartItems) => {
-        this.cartItems = cartItems;
-      });
   }
 
   viewProduct(product: any): void {
@@ -42,9 +35,5 @@ export class ShopComponent implements OnInit, OnDestroy {
 
   addToCart(product: any): void {
     this.cartService.addToCart(product);
-  }
-
-  ngOnDestroy(): void {
-    this.cartItemsSubscription.unsubscribe();
   }
 }
